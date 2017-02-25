@@ -1,5 +1,5 @@
 # winup
-A fake Windows Update For Full Screen Pranks.
+A never ending fake Windows Update perfect for full screen pranks.
 
 Demo:
 https://zamicol.github.io/winup/
