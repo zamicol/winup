@@ -1,0 +1,131 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Updating Windows</title>
+    <meta name="description" content="Updating Windows">
+    <meta name="author" content="Zamicol">
+    <meta name="credit" content="http://samherbert.net/svg-loaders/">
+
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            color: white;
+            background-color: #1A67B3;
+            font-family: Arial;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            margin: 0;
+            display: table
+        }
+
+        body>div {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img alt="" src="data:image/svg+xml;base64,PCEtLSBCeSBTYW0gSGVyYmVydCAoQHNoZXJiKSwgZm9yIGV2ZXJ5b25lLiBNb3JlIEAgaHR0cDovL2dvby5nbC83QUp6YkwgLS0+Cjxzdmcgd2lkdGg9IjM4IiBoZWlnaHQ9IjM4IiB2aWV3Qm94PSIwIDAgMzggMzgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8ZGVmcz4KICAgICAgICA8bGluZWFyR3JhZGllbnQgeDE9IjguMDQyJSIgeTE9IjAlIiB4Mj0iNjUuNjgyJSIgeTI9IjIzLjg2NSUiIGlkPSJhIj4KICAgICAgICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIwIiBvZmZzZXQ9IjAlIi8+CiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iLjYzMSIgb2Zmc2V0PSI2My4xNDYlIi8+CiAgICAgICAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiNmZmYiIG9mZnNldD0iMTAwJSIvPgogICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8L2RlZnM+CiAgICA8ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEgMSkiPgogICAgICAgICAgICA8cGF0aCBkPSJNMzYgMThjMC05Ljk0LTguMDYtMTgtMTgtMTgiIGlkPSJPdmFsLTIiIHN0cm9rZT0idXJsKCNhKSIgc3Ryb2tlLXdpZHRoPSIyIj4KICAgICAgICAgICAgICAgIDxhbmltYXRlVHJhbnNmb3JtCiAgICAgICAgICAgICAgICAgICAgYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIgogICAgICAgICAgICAgICAgICAgIHR5cGU9InJvdGF0ZSIKICAgICAgICAgICAgICAgICAgICBmcm9tPSIwIDE4IDE4IgogICAgICAgICAgICAgICAgICAgIHRvPSIzNjAgMTggMTgiCiAgICAgICAgICAgICAgICAgICAgZHVyPSIwLjlzIgogICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAvPgogICAgICAgICAgICA8L3BhdGg+CiAgICAgICAgICAgIDxjaXJjbGUgZmlsbD0iI2ZmZiIgY3g9IjM2IiBjeT0iMTgiIHI9IjEiPgogICAgICAgICAgICAgICAgPGFuaW1hdGVUcmFuc2Zvcm0KICAgICAgICAgICAgICAgICAgICBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iCiAgICAgICAgICAgICAgICAgICAgdHlwZT0icm90YXRlIgogICAgICAgICAgICAgICAgICAgIGZyb209IjAgMTggMTgiCiAgICAgICAgICAgICAgICAgICAgdG89IjM2MCAxOCAxOCIKICAgICAgICAgICAgICAgICAgICBkdXI9IjAuOXMiCiAgICAgICAgICAgICAgICAgICAgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIC8+CiAgICAgICAgICAgIDwvY2lyY2xlPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg%3D%3D"
+        />
+        <p>Configuring update for Windows 10</p>
+        <span id="complete">0</span>% complete</p>
+        <p>Do not turn off your computer</p>
+    </div>
+    <script>
+        // percent is the complete percent.
+        var percent = 3;
+        // multiplier is how fast the update will progress.
+        // Change to low values for testing.
+        // For one second, set to 1000
+        var multiplier = 1000;
+
+        start();
+
+        async function start() {
+            await sleep(200);
+            advance();
+        }
+
+        async function advance() {
+            // 5 seconds times 0 to 1
+            await sleep(5 * multiplier * Math.random());
+
+            percent++;
+            await set(percent);
+            advance();
+        }
+
+        async function set() {
+            console.log("setting");
+            // Never finish!
+            if (percent >= 100) {
+                percent = Math.floor(100 * Math.random());
+                console.log("reset: " + percent)
+            }
+            document.getElementById("complete").innerHTML = percent;
+
+            // Random time to advance.
+            await sleep(5 * multiplier * Math.random());
+
+            // Random 1 in 5 long pause
+            // for Windows to do super  important things.
+            if (Math.random() < .2) {
+                await sleep(15 * multiplier);
+            }
+
+            // Random 1 in 10 very long pause
+            // for Windows to send user data to remote servers.  Wifi may have
+            // dopped?
+            if (Math.random() < .1) {
+                await sleep(60 * multiplier);
+            }
+
+            // For authenticity progress incrementing should takes longer the
+            // higher it goes. Intentially Cumulative.
+            if (percent >= 30) {
+                await sleep(5 * multiplier * Math.random());
+            }
+
+            if (percent >= 50) {
+                await sleep(10 * multiplier * Math.random());
+            }
+
+            if (percent >= 70) {
+                await sleep(30 * multiplier * Math.random());
+            }
+
+            if (percent >= 88) {
+                await sleep(60 * multiplier * Math.random());
+            }
+
+            if (percent >= 94) {
+                await sleep(80 * multiplier * Math.random());
+            }
+
+            // That last little bit
+            if (percent >= 98) {
+                await sleep(120 * multiplier * Math.random());
+            }
+        }
+
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+    </script>
+</body>
+
+</html>
