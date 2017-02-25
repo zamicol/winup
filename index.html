@@ -49,76 +49,75 @@
         var percent = 3;
         // multiplier is how fast the update will progress.
         // Change to low values for testing.
-        // For one second, set to 1000
+        // For a long but reasonable update, set to 1000
         var multiplier = 1000;
 
-        start();
-
-        async function start() {
-            await sleep(200);
-            advance();
-        }
+        advance();
 
         async function advance() {
-            // 5 seconds times 0 to 1
-            await sleep(5 * multiplier * Math.random());
-
             percent++;
             await set(percent);
             advance();
         }
 
         async function set() {
-            console.log("setting");
             // Never finish!
+            //  Reset to random time like the good ol' days.
             if (percent >= 100) {
                 percent = Math.floor(100 * Math.random());
                 console.log("reset: " + percent)
             }
             document.getElementById("complete").innerHTML = percent;
+            // Time to advance.
+            var time = 5;
 
-            // Random time to advance.
-            await sleep(5 * multiplier * Math.random());
 
             // Random 1 in 5 long pause
             // for Windows to do super  important things.
             if (Math.random() < .2) {
-                await sleep(15 * multiplier);
+                time += 15;
             }
 
-            // Random 1 in 10 very long pause
-            // for Windows to send user data to remote servers.  Wifi may have
-            // dopped?
-            if (Math.random() < .1) {
-                await sleep(60 * multiplier);
-            }
-
+            // Start to slow down once some progress is made.
             // For authenticity progress incrementing should takes longer the
             // higher it goes. Intentially Cumulative.
-            if (percent >= 30) {
-                await sleep(5 * multiplier * Math.random());
+            if (percent > 20) {
+                // Random 1 in 10 very long pause
+                // for Windows to send user data to remote servers.  Wifi may have
+                // dopped?
+                if (Math.random() < .1) {
+                    time += 60;
+                }
+
+                if (percent >= 30) {
+                    time += 5;
+                }
+
+                if (percent >= 50) {
+                    time += 10;
+                }
+
+                if (percent >= 70) {
+                    time += 30;
+                }
+
+                if (percent >= 88) {
+                    time += 60;
+                }
+
+                if (percent >= 94) {
+                    time += 80;
+                }
+
+                // That last little bit
+                if (percent >= 98) {
+                    time += 120;
+                }
             }
 
-            if (percent >= 50) {
-                await sleep(10 * multiplier * Math.random());
-            }
-
-            if (percent >= 70) {
-                await sleep(30 * multiplier * Math.random());
-            }
-
-            if (percent >= 88) {
-                await sleep(60 * multiplier * Math.random());
-            }
-
-            if (percent >= 94) {
-                await sleep(80 * multiplier * Math.random());
-            }
-
-            // That last little bit
-            if (percent >= 98) {
-                await sleep(120 * multiplier * Math.random());
-            }
+            var sleeptime = Math.floor(time * multiplier * Math.floor(10 * Math.random()));
+            console.log("Process for " + sleeptime + "ms");
+            await sleep(time * multiplier * Math.random());
         }
 
 
