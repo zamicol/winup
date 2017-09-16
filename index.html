@@ -80,11 +80,10 @@
 
             // Start to slow down once some progress is made.
             // For authenticity progress incrementing should takes longer the
-            // higher it goes. Intentially Cumulative.
+            // higher it goes. Intentially cumulative.
             if (percent > 20) {
-                // Random 1 in 10 very long pause
-                // for Windows to send user data to remote servers.  Wifi may have
-                // dopped?
+                // Random 1 in 10 very long pause for Windows to send user 
+                // data to remote servers.  Wifi may have dopped?
                 if (Math.random() < .1) {
                     time += 60;
                 }
