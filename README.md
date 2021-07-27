@@ -8,3 +8,7 @@ To start in full screen via the command line:
 ```
 chromium-browser --kiosk --app="https://zamicol.github.io/winup/
 ```
+
+```
+firefox --kiosk -new-tab "https://zamicol.github.io/winup"
+```
